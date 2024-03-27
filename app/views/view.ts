@@ -4,7 +4,12 @@ export abstract class View <T> { // Classe abstrata genérica
     private escapar = false;
 
     constructor(seletor: string, escapar?: boolean){
-        this.element = document.querySelector(seletor);
+        const element = document.querySelector(seletor);
+       if (element) {
+        this.element = element as HTMLInputElement;
+       } else {
+        throw Error (`Seletor ${seletor} não existe no DOM. Verifique.`);
+       }
         if (escapar) {
             this.escapar = escapar;
         }
